@@ -72,15 +72,15 @@ function renderCanvas() {
   context.stroke();
 
   // Ball
-  // context.beginPath();
-  // context.arc(ballX, ballY, ballRadius, 2 * Math.PI, false);
-  // context.fillStyle = 'white';
-  // context.fill();
+  context.beginPath();
+  context.arc(ballX, ballY, ballRadius, 2 * Math.PI, false);
+  context.fillStyle = 'white';
+  context.fill();
 
   // Score
-  // context.font = '32px Courier New';
-  // context.fillText(playerScore, 20, canvas.height / 2 + 50);
-  // context.fillText(computerScore, 20, canvas.height / 2 - 30);
+  context.font = '32px Courier New';
+  context.fillText(playerScore, 20, canvas.height / 2 + 50);
+  context.fillText(computerScore, 20, canvas.height / 2 - 30);
 }
 
 // Create Canvas Element
@@ -205,9 +205,16 @@ function gameOver() {
 
 // Called Every Frame
 function animate() {
+  // creates canvas
   renderCanvas();
+  // gamelogic to speed up ball
+  // increases and decresses for ball on everyhit
   ballMove();
+  // takes care of boundaries and tracks if the ball crossed bottom or top
+  // increments score
   ballBoundaries();
+  // very basic if plyer moves comp moves uses ball position to move paddle same way but more slowly
+//  does worse as ball speed increases (Streak)
   computerAI();
 
 }
@@ -228,6 +235,8 @@ function startGame() {
   canvas.addEventListener('mousemove', (e) => {
     console.log(e.clientX);
     playerMoved = true;
+  // hides cursor and just controls paddle console log shows where in canvas
+
     // Compensate for canvas being centered
     paddleBottomX = e.clientX - canvasPosition - paddleDiff;
     if (paddleBottomX < paddleDiff) {
