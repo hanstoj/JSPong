@@ -206,6 +206,7 @@ function gameOver() {
 // Called Every Frame
 function animate() {
   // creates canvas
+
   renderCanvas();
   // gamelogic to speed up ball
   // increases and decresses for ball on everyhit
@@ -216,6 +217,7 @@ function animate() {
   // very basic if plyer moves comp moves uses ball position to move paddle same way but more slowly
 //  does worse as ball speed increases (Streak)
   computerAI();
+  window.requestAnimationFrame(animate);
 
 }
 
@@ -231,7 +233,7 @@ function startGame() {
   computerScore = 0;
   ballReset();
   createCanvas();
-  // animate();
+  animate();
   setInterval(animate, 1000/60);
   canvas.addEventListener('mousemove', (e) => {
     console.log(e.clientX);
